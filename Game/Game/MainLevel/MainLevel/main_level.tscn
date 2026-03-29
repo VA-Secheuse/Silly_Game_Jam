@@ -209,6 +209,7 @@ offset_left = -481.0
 offset_top = -270.0
 offset_right = 1449.0
 offset_bottom = 818.0
+scale = Vector2(0.5, 0.5)
 
 [node name="PauseMenu" parent="YSort/RobinTown" node_paths=PackedStringArray("main_menue") instance=ExtResource("6_dpwkj")]
 process_mode = 3
