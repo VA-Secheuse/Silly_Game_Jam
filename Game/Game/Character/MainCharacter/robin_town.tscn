@@ -1,22 +1,91 @@
-[gd_scene load_steps=9 format=3 uid="uid://cmn34b5qn4sx2"]
+[gd_scene load_steps=14 format=3 uid="uid://cmn34b5qn4sx2"]
 
 [ext_resource type="Texture2D" uid="uid://bxgvuwmwdfhl0" path="res://Assets/Personnage/Main dude/Main_dude.png" id="1_5vkwo"]
 [ext_resource type="Script" uid="uid://7gda5jr3ue4v" path="res://Game/Character/MainCharacter/robin_town.gd" id="1_dbb5j"]
+[ext_resource type="Shader" uid="uid://dprjp3e3gvvvf" path="res://Game/Character/Alex/damage.gdshader" id="2_msp1c"]
 [ext_resource type="Script" uid="uid://ug0nvx2a603c" path="res://Game/System/StateMachine/state_machine.gd" id="3_hgdaa"]
 [ext_resource type="Script" uid="uid://cdu54sve7sbyo" path="res://Game/Character/MainCharacter/idle.gd" id="4_j0xwr"]
 [ext_resource type="Script" uid="uid://ckqt70hwyhix3" path="res://Game/Character/MainCharacter/walking.gd" id="5_j0xwr"]
 [ext_resource type="Script" uid="uid://df0oxqa3tvbyi" path="res://Game/weapon/soap/soap_weapon.gd" id="6_25m7p"]
 [ext_resource type="FontFile" uid="uid://bxcwj1nudjx55" path="res://Assets/font/m6x11.ttf" id="6_o08pi"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fubrf"]
+shader = ExtResource("2_msp1c")
+shader_parameter/flash_color = Color(0.96474224, 0.96474224, 0.9647421, 1)
+shader_parameter/flash_value = 0.0
+
+[sub_resource type="Animation" id="Animation_msp1c"]
+resource_name = "flash"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:i_frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_fubrf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:i_frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fubrf"]
+_data = {
+&"RESET": SubResource("Animation_fubrf"),
+&"flash": SubResource("Animation_msp1c")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dbb5j"]
 size = Vector2(23, 24)
 
-[node name="RobinTown" type="CharacterBody2D"]
-collision_mask = 27
+[node name="RobinTown" type="CharacterBody2D" node_paths=PackedStringArray("soap_weapon")]
+collision_mask = 59
 script = ExtResource("1_dbb5j")
+soap_weapon = NodePath("Weapons/Soap")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_fubrf")
 position = Vector2(-1, -12)
 scale = Vector2(2, 2)
 texture = ExtResource("1_5vkwo")
@@ -26,6 +95,11 @@ position = Vector2(9, 9.5)
 
 [node name="held_left" type="Marker2D" parent="Sprite2D"]
 position = Vector2(-10, 9.5)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_fubrf")
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, 8)
@@ -81,3 +155,10 @@ theme_override_fonts/font = ExtResource("6_o08pi")
 theme_override_font_sizes/font_size = 50
 text = "0$"
 horizontal_alignment = 2
+
+[node name="Score" type="Label" parent="Camera2D/UI"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("6_o08pi")
+theme_override_font_sizes/font_size = 50

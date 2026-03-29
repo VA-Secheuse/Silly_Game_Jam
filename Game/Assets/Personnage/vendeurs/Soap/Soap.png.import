@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dh6w3ovsvouqa"
-path="res://.godot/imported/Tileset_grass.png-5f647ca585882819b1da76e16c2812d4.ctex"
+uid="uid://konkil644mw1"
+path="res://.godot/imported/Soap.png-59131319a67ea248295885e17e5f2916.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/TileSet/Tileset_grass.png"
-dest_files=["res://.godot/imported/Tileset_grass.png-5f647ca585882819b1da76e16c2812d4.ctex"]
+source_file="res://Assets/Personnage/vendeurs/Soap/Soap.png"
+dest_files=["res://.godot/imported/Soap.png-59131319a67ea248295885e17e5f2916.ctex"]
 
 [params]
 

@@ -167,10 +167,9 @@ texture = ExtResource("4_koxwm")
 
 [node name="Projectile" type="Node" parent="YSort"]
 
-[node name="WaveManage" type="Node2D" parent="YSort" node_paths=PackedStringArray("spawn_node")]
+[node name="WaveManage" type="Node2D" parent="YSort"]
 y_sort_enabled = true
 script = ExtResource("5_axomv")
-spawn_node = NodePath("Ennemies")
 
 [node name="Ennemies" type="Node2D" parent="YSort/WaveManage"]
 y_sort_enabled = true

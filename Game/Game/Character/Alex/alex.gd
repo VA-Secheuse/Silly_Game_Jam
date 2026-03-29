@@ -1,8 +1,9 @@
 class_name Enemies extends CharacterBody2D
 
-var speed = 25
+var speed = 100
 var life = 5
 var knockback = Vector2.ZERO
+var damage = 1
 
 static var ennemie = preload("res://Game/Character/Alex/alex.tscn")
 
@@ -23,8 +24,8 @@ static func spawn(vector : Vector2,node : Node):
 	node.add_child(new_ennemie)
 	new_ennemie.global_position = vector
 
-func receive_damage(damage, hit_direction: Vector2):
-	life = life - damage
+func receive_damage(damage : int, hit_direction: Vector2):
+	life -= damage
 	knockback = hit_direction * 200 
 	if(life <= 0):
 		kill()
@@ -36,3 +37,12 @@ func receive_damage(damage, hit_direction: Vector2):
 func kill():
 	Money.create_and_intantiate(randi_range(5,10),self.global_position,get_parent())
 	self.queue_free()
+	get_tree().get_root().get_node("MainLevel").add_score(50)
+
+
+func _on_damage_radius_body_entered(body: Node2D) -> void:
+	if body.has_method('receive_damage'):
+		body.receive_damage(-damage)
+		var direction = (self.global_position - body.global_position).normalized()
+		knockback = direction * 400 
+	

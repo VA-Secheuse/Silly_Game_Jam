@@ -11,6 +11,8 @@ func _ready() -> void:
 const SPEED = 400.0
 var direction: Vector2 = Vector2.ZERO
 
+
+
 func set_direction(dir: Vector2):
 	direction = dir
 

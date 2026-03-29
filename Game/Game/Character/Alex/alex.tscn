@@ -1,8 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://dm8bk0jly3mfq"]
+[gd_scene load_steps=13 format=3 uid="uid://dm8bk0jly3mfq"]
 
 [ext_resource type="Shader" uid="uid://dprjp3e3gvvvf" path="res://Game/Character/Alex/damage.gdshader" id="1_ok25u"]
 [ext_resource type="Script" uid="uid://b5rv78cj4u2n5" path="res://Game/Character/Alex/alex.gd" id="1_pxjao"]
-[ext_resource type="Texture2D" uid="uid://wkf5j5r0nuaq" path="res://Assets/Personnage/Tweaker/tweaker.png" id="1_vvtea"]
+[ext_resource type="Texture2D" uid="uid://wkf5j5r0nuaq" path="res://Assets/Personnage/Sans abris/tweaker.png" id="1_vvtea"]
 [ext_resource type="Script" uid="uid://ug0nvx2a603c" path="res://Game/System/StateMachine/state_machine.gd" id="3_l2x06"]
 [ext_resource type="Script" uid="uid://cpnstagxqdfnc" path="res://Game/Character/Alex/attack.gd" id="4_ok25u"]
 
@@ -54,12 +54,15 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pxjao"]
-size = Vector2(22.5, 27)
+size = Vector2(27, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ok25u"]
+size = Vector2(29, 46)
 
 [node name="Alex" type="CharacterBody2D"]
 material = SubResource("ShaderMaterial_nca5s")
 collision_layer = 2
-collision_mask = 15
+collision_mask = 13
 script = ExtResource("1_pxjao")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -75,7 +78,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(0.25, 5.5)
+position = Vector2(-0.5, -5)
 shape = SubResource("RectangleShape2D_pxjao")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
@@ -85,3 +88,12 @@ metadata/_custom_type_script = "uid://ug0nvx2a603c"
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("4_ok25u")
+
+[node name="DamageRadius" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageRadius"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_ok25u")
+
+[connection signal="body_entered" from="DamageRadius" to="." method="_on_damage_radius_body_entered"]

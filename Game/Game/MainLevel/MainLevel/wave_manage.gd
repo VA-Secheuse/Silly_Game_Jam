@@ -5,23 +5,26 @@ var difficulty = 1
 var spawn_timer: Timer
 var ennemie_array = []
 
-var spawn_node : Node
+@export var spawn_node : Node
 func _ready():
 	spawn_timer = Timer.new()
 	add_child(spawn_timer)
 	spawn_timer.timeout.connect(_spawn_next_enemy)
-	spawn_node = $Ennemies
+
 
 func spawn_wave():
 	for ennemie in ennemie_array:
 		pass
 
 func next_wave():
-	pass
+	wave_done()
+	generate_wave_array()
+	_spawn_next_enemy()
 
 func start_wave():
 	generate_wave_array()
 	spawn_timer.start()
+	
 
 func generate_wave_array():
 	for i in range(difficulty*10 + 10):
