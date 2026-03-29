@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=4 uid="uid://dolaqitvviqwr"]
 
-[ext_resource type="Texture2D" uid="uid://dh6w3ovsvouqa" path="res://Assets/tileset/Tileset_grass.png" id="1_tkreh"]
+[ext_resource type="Texture2D" uid="uid://dh6w3ovsvouqa" path="res://Assets/TileSet/Tileset_grass.png" id="1_tkreh"]
 [ext_resource type="Texture2D" uid="uid://d4nwy1n7j422g" path="res://Tile_set.png" id="2_525j1"]
 [ext_resource type="Texture2D" uid="uid://dqymrs0nxnh1d" path="res://Assets/Tileset_suite/Tile_set_total.png" id="3_xtgmq"]
 [ext_resource type="PackedScene" uid="uid://dff71xo881nb7" path="res://Game/Character/mope_pnj/mope_PNJ.tscn" id="4_fi1dd"]
@@ -194,6 +194,7 @@ tile_map_data = PackedByteArray("AAD1/wcAAQABAAEAAAD3/wcAAQABAAEAAAD4/wcAAQABAAE
 tile_set = SubResource("TileSet_vl6sd")
 
 [node name="Decoration" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="Tree" parent="Decoration" instance=ExtResource("7_525j1")]
 position = Vector2(-522, 215)
@@ -466,6 +467,8 @@ position = Vector2(-522, 215)
 
 [node name="Metro" parent="Building" instance=ExtResource("4_mqebe")]
 position = Vector2(-67, -198)
+collision_layer = 8
+collision_mask = 7
 
 [node name="house2" parent="Building" instance=ExtResource("12_vl6sd")]
 position = Vector2(978, -12)
@@ -483,9 +486,14 @@ position = Vector2(-76, -839)
 
 [node name="MopePNJ" parent="NPC" instance=ExtResource("4_fi1dd")]
 position = Vector2(-367, 665)
+collision_layer = 8
 
 [node name="SoapPNJ" parent="NPC" instance=ExtResource("5_oghek")]
 position = Vector2(-152, 74)
+collision_layer = 8
+collision_mask = 7
 
 [node name="DetergentNpc" parent="NPC" instance=ExtResource("6_mqebe")]
 position = Vector2(237, -773)
+collision_layer = 8
+collision_mask = 7

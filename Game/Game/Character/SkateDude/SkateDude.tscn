@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://0jn8wao5cktp"]
+[gd_scene load_steps=10 format=3 uid="uid://0jn8wao5cktp"]
 
 [ext_resource type="Shader" uid="uid://dprjp3e3gvvvf" path="res://Game/Character/Alex/damage.gdshader" id="1_002f2"]
 [ext_resource type="Script" uid="uid://cplwn02gbv0ts" path="res://Game/Character/SkateDude/skate_dude.gd" id="1_vqah0"]
 [ext_resource type="Texture2D" uid="uid://b82tsj86kbmay" path="res://Assets/Personnage/Enemies/Skater.png" id="2_002f2"]
 [ext_resource type="Script" uid="uid://ug0nvx2a603c" path="res://Game/System/StateMachine/state_machine.gd" id="3_rm3ix"]
 [ext_resource type="Script" uid="uid://cpnstagxqdfnc" path="res://Game/Character/Alex/attack.gd" id="4_wuhta"]
-[ext_resource type="AudioStream" uid="uid://dquaph4w63ooc" path="res://Assets/Sound/mob_hurt.mp3" id="6_rm3ix"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2oqhe"]
 shader = ExtResource("1_002f2")
@@ -83,8 +82,5 @@ polygon = PackedVector2Array(-19, 14, -8, 18, 11, 19, 23, 11, 20, 5, 15, 7, 11, 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
 polygon = PackedVector2Array(-18, 14, -8, 18, -3, 15, 6, 15, 9, 18, 13, 14, 19, 12, 13, 9, 8, 0, 9, -15, 12, -15, 10, -22, 5, -25, 11, -30, 10, -38, -4, -35, -3, -23, -7, -20, -10, -14, -6, -14, -7, -1, -6, 9, -17, 10)
-
-[node name="Hurt" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_rm3ix")
 
 [connection signal="body_entered" from="DamageRadius" to="." method="_on_damage_radius_body_entered"]

@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bvi50kv06o6ho"]
+[gd_scene load_steps=12 format=3 uid="uid://bvi50kv06o6ho"]
 
 [ext_resource type="Shader" uid="uid://dprjp3e3gvvvf" path="res://Game/Character/Alex/damage.gdshader" id="1_61a4x"]
 [ext_resource type="Texture2D" uid="uid://b5ouuseq2df45" path="res://Assets/Personnage/Enemies/Dude_qui_roule.png" id="1_m0bcm"]
 [ext_resource type="Script" uid="uid://dkckmrddexeku" path="res://Game/Character/Tommy/rouly.gd" id="1_pb7p0"]
 [ext_resource type="Script" uid="uid://ug0nvx2a603c" path="res://Game/System/StateMachine/state_machine.gd" id="3_pb7p0"]
 [ext_resource type="Script" uid="uid://dfhhdhbrmpush" path="res://Game/Character/Tommy/attack.gd" id="5_pb7p0"]
-[ext_resource type="AudioStream" uid="uid://dquaph4w63ooc" path="res://Assets/Sound/mob_hurt.mp3" id="6_t6h1p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jmmy4"]
 shader = ExtResource("1_61a4x")
@@ -90,8 +89,5 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageRadius"]
 position = Vector2(1, -12)
 shape = SubResource("CircleShape2D_pb7p0")
-
-[node name="Hurt" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_t6h1p")
 
 [connection signal="body_entered" from="DamageRadius" to="." method="_on_damage_radius_body_entered"]

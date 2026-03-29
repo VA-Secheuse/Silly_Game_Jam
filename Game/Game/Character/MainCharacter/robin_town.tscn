@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cmn34b5qn4sx2"]
+[gd_scene load_steps=21 format=3 uid="uid://cmn34b5qn4sx2"]
 
 [ext_resource type="Texture2D" uid="uid://bxgvuwmwdfhl0" path="res://Assets/Personnage/Main dude/Main_dude.png" id="1_5vkwo"]
 [ext_resource type="Script" uid="uid://7gda5jr3ue4v" path="res://Game/Character/MainCharacter/robin_town.gd" id="1_dbb5j"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bcp83br8pbecl" path="res://Assets/Icone/Coeur.png" id="11_pyugw"]
 [ext_resource type="AudioStream" uid="uid://blatmlyq43m" path="res://Assets/Sound/player_hurt.mp3" id="12_ugth5"]
 [ext_resource type="AudioStream" uid="uid://bhchgq0wgtcu5" path="res://Assets/Sound/mainMusic.mp3" id="13_op5f0"]
+[ext_resource type="Texture2D" uid="uid://cdgtnqedoouv2" path="res://Assets/Icone/Point_exclamation.png" id="15_kmpvd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fubrf"]
 shader = ExtResource("2_msp1c")
@@ -217,6 +218,13 @@ volume_db = -20.0
 process_mode = 3
 stream = ExtResource("13_op5f0")
 volume_db = -30.0
+
+[node name="Exclamation" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(20, -26)
+scale = Vector2(2, 2)
+texture = ExtResource("15_kmpvd")
 
 [connection signal="timeout" from="Weapons/Soap2" to="." method="_on_soap_2_timeout"]
 [connection signal="timeout" from="Weapons/Mope2" to="." method="_on_mope_2_timeout"]

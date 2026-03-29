@@ -3,7 +3,7 @@ class_name Player extends CharacterBody2D
 @export var speed = 400
 
 var base_speed = 400
-var money = 5000
+var money = 0
 
 var life = 10
 
@@ -32,7 +32,7 @@ func _ready() -> void:
 
 
 func restart():
-	money = 6000
+	money = 0
 	life = 10 
 	score = 0
 	update_score(score)
@@ -74,3 +74,10 @@ func _on_soap_2_timeout() -> void:
 func _on_mope_2_timeout() -> void:
 	if mope_weapon.enable  == true:
 		mope_weapon.use_weapon()
+
+func interact_true():
+	$Exclamation.visible = true
+
+func interact_false():
+	$Exclamation.visible = false
+	

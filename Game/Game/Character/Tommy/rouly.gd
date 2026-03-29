@@ -37,7 +37,6 @@ func receive_damage(damage : int, hit_direction: Vector2):
 
 func kill():
 	Money.create_and_intantiate(randi_range(50,75),self.global_position,get_parent())
-	$hurt.play()
 	self.queue_free()
 	get_tree().get_root().get_node("MainLevel").add_score(100)
 

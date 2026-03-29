@@ -32,9 +32,13 @@ func _on_no_pressed() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.has_method('update_display'):
-		is_player = true	
+		is_player = true
+		if(body.has_method('interact_true')):
+			body.interact_true()
 		player = body
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	is_player = false
+	if(body.has_method('interact_false')):
+			body.interact_false()
 	player = null
