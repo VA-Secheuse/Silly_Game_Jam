@@ -4,20 +4,31 @@ class_name Player extends CharacterBody2D
 
 var money = 6000
 
-var held_item : Item
-
-var life = 10 
+var life = 2
 
 var score = 0
+
 @export var i_frame = false
 
 @export var soap_weapon : Soap 
 
+@export var mainLevel : MainLevel
+
 func _ready() -> void:
+	update_score(score)
 	$Camera2D/UI.move_to_front()
+
 func _process(delta: float) -> void:
 	if(Input.is_action_just_pressed("Action")):
 		$Weapons/Soap.use_weapon()
+
+func restart():
+	money = 6000
+	life = 10 
+	score = 0
+	update_score(score)
+	$Weapons/Soap.restart()
+	
 
 func update_display(elapsed_time):
 	var minutes = int(elapsed_time) / 60
@@ -37,3 +48,6 @@ func receive_damage(life_change : int):
 		i_frame = true
 		life += life_change
 		$Sprite2D/AnimationPlayer.play("flash")
+	if(life <=0):
+		mainLevel.death_screen()
+		

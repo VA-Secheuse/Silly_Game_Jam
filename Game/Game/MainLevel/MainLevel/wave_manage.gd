@@ -11,6 +11,13 @@ func _ready():
 	add_child(spawn_timer)
 	spawn_timer.timeout.connect(_spawn_next_enemy)
 
+func restart():
+	difficulty =1
+	ennemie_array = []
+	cur_wave = 1
+	spawn_timer.free()
+	_ready()
+	
 
 func spawn_wave():
 	for ennemie in ennemie_array:

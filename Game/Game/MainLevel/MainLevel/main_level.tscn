@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://cnbpysf0eyut7"]
+[gd_scene load_steps=14 format=4 uid="uid://cnbpysf0eyut7"]
 
 [ext_resource type="Script" uid="uid://ceaghd0rio7wu" path="res://Game/MainLevel/MainLevel/main_level.gd" id="1_d5304"]
 [ext_resource type="Texture2D" uid="uid://dh6w3ovsvouqa" path="res://Assets/TileSet/Tileset_grass.png" id="2_axomv"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b50qkrfnt8e07" path="res://Assets/Maison1/Metro station.png" id="4_koxwm"]
 [ext_resource type="Script" uid="uid://tn2fed45oelj" path="res://Game/MainLevel/MainLevel/wave_manage.gd" id="5_axomv"]
 [ext_resource type="PackedScene" uid="uid://b8r1lv656841g" path="res://Game/pause_menu.tscn" id="6_dpwkj"]
+[ext_resource type="PackedScene" uid="uid://bapikxoy1rixe" path="res://game_over_screen.tscn" id="7_75k3s"]
 [ext_resource type="PackedScene" uid="uid://dh2jfxaiwwocy" path="res://Game/Items/money/soap_pnj.tscn" id="7_koxwm"]
 [ext_resource type="PackedScene" uid="uid://btexfhy7fdk0k" path="res://Game/main_menu.tscn" id="8_miu8m"]
 
@@ -131,8 +132,9 @@ tile_set = SubResource("TileSet_f05wf")
 y_sort_enabled = true
 position = Vector2(21, 2)
 
-[node name="RobinTown" parent="YSort" instance=ExtResource("3_bbwh8")]
+[node name="RobinTown" parent="YSort" node_paths=PackedStringArray("mainLevel") instance=ExtResource("3_bbwh8")]
 position = Vector2(-97, 221)
+mainLevel = NodePath("../..")
 
 [node name="MainMenu" parent="YSort/RobinTown" instance=ExtResource("8_miu8m")]
 process_mode = 3
@@ -151,6 +153,16 @@ offset_top = -221.0
 offset_right = 143.0
 offset_bottom = 200.0
 main_menue = NodePath("../MainMenu")
+
+[node name="GameOverScreen" parent="YSort/RobinTown" node_paths=PackedStringArray("main_game") instance=ExtResource("7_75k3s")]
+process_mode = 3
+visible = false
+offset_left = -486.0
+offset_top = -275.0
+offset_right = 1452.0
+offset_bottom = 827.0
+scale = Vector2(0.5, 0.5)
+main_game = NodePath("../../..")
 
 [node name="Alexhouse" type="StaticBody2D" parent="YSort"]
 collision_layer = 8
@@ -185,6 +197,9 @@ one_shot = true
 [node name="PauseTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="SpawnPosition" type="Marker2D" parent="."]
+position = Vector2(-79, 247)
 
 [connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]
 [connection signal="timeout" from="PauseTimer" to="." method="_on_pause_timer_timeout"]

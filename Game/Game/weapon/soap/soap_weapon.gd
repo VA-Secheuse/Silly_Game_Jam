@@ -26,7 +26,11 @@ func _ready():
 	second_projectile_timer.one_shot = true
 	second_projectile_timer.wait_time = 0.5
 
-
+func restart():
+	weapon_level = 1
+	price_too_upgrade = 100
+	projectile_damage = 1
+	projectile_scale = Vector2(1,1)
 
 func use_weapon():
 	match weapon_level:
@@ -58,7 +62,7 @@ func shoot_spread(position: Vector2, toward: Vector2, count: int, spread_degrees
 
 func spawn_projectile(position: Vector2, direction: Vector2):
 	var new_projectile: SoapProjectile = soap_projectile.instantiate()
-	get_tree().current_scene.add_child(new_projectile)
+	get_tree().get_root().get_node('MainLevel/YSort/Projectile').add_child(new_projectile)
 	new_projectile.global_position = position
 	new_projectile.set_direction(direction)
 	new_projectile.scale = self.projectile_scale
@@ -67,7 +71,7 @@ func spawn_projectile(position: Vector2, direction: Vector2):
 func shoot(position: Vector2,toward : Vector2):
 	var new_projectile: SoapProjectile = soap_projectile.instantiate()
 	var direction = position.direction_to(toward)
-	get_tree().current_scene.add_child(new_projectile)
+	get_tree().get_root().get_node('MainLevel/YSort/Projectile').add_child(new_projectile)
 	new_projectile.global_position = position
 	new_projectile.set_direction(direction)
 	new_projectile.scale = self.projectile_scale
