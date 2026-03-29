@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://blouc5yr1fp28"]
+
+[ext_resource type="Texture2D" uid="uid://dd31pgu4hs31u" path="res://Assets/Tileset_suite/Vélo_transparent.png" id="1_tlyxd"]
+
+[node name="Node2D" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2(0, -17)
+polygon = PackedVector2Array(-25, 30, 3, 33, 17, 13, 4, 11, -4, 11, -12, 10, -19, 16, -24, 23)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_tlyxd")

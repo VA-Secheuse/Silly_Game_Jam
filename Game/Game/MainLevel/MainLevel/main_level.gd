@@ -9,7 +9,6 @@ var elapsed_time: float = 0.0
 
 var highScore : int = 0
 
-
 func _ready() -> void:
 	$YSort/RobinTown/MainMenu.visible = true
 	pause_game()
@@ -26,6 +25,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Pause"):
 		pause_game()
 		$YSort/RobinTown/PauseMenu.visible = true
+
 
 func _on_wave_timer_timeout() -> void:
 	$PauseTimer.start()

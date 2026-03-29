@@ -9,6 +9,7 @@ var ennemie_array = []
 func _ready():
 	spawn_timer = Timer.new()
 	add_child(spawn_timer)
+	spawn_timer.wait_time = 0.25
 	spawn_timer.timeout.connect(_spawn_next_enemy)
 
 func restart():
@@ -34,8 +35,19 @@ func start_wave():
 	
 
 func generate_wave_array():
-	for i in range(difficulty*10 + 10):
-		ennemie_array.append(Enemies.new())
+	var max_small = 60
+	var cur_small = difficulty*10 +10
+	if cur_small > max_small:
+		cur_small = 60
+	for i in range(cur_small):
+		ennemie_array.append(1)
+	if(difficulty > 3):
+		for i in range((difficulty-3) *2):
+			ennemie_array.append(2)
+	if(difficulty > 6):
+		for i in range((difficulty-6) * 2):
+			ennemie_array.append(3)
+	ennemie_array.shuffle()
 	spawn_timer.wait_time = randf_range(0.5, 1.0)
 
 func wave_done():
@@ -49,8 +61,18 @@ func _spawn_next_enemy():
 		spawn_timer.stop()  
 		return
 	
-	var enemy : Enemies = ennemie_array.pop_front()
-	Enemies.spawn(_generate_coordinate_out_of_vision(),spawn_node)
+	
+	var enemy = ennemie_array.pop_front()
+	
+	match enemy:
+		1:
+			Enemies.spawn(_generate_coordinate_out_of_vision(),spawn_node)
+		2:
+			Rouly.spawn(_generate_coordinate_out_of_vision(),spawn_node) 
+		3:
+			SkateDude.spawn(_generate_coordinate_out_of_vision(),spawn_node)
+		_:
+			pass
 	spawn_timer.wait_time = randf_range(0.5, 1.0) 
 	spawn_timer.start()
 

@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bm40ydojp2v6t"]
+[gd_scene load_steps=3 format=3 uid="uid://bm40ydojp2v6t"]
 
 [ext_resource type="Script" uid="uid://df0oxqa3tvbyi" path="res://Game/weapon/soap/soap_weapon.gd" id="1_ml47o"]
+[ext_resource type="AudioStream" uid="uid://cd88k8q26fnea" path="res://Assets/Sound/soap.mp3" id="2_mcvwy"]
 
 [node name="SoapWeapon" type="Node2D"]
 script = ExtResource("1_ml47o")
 
 [node name="Projectiles" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_mcvwy")
+volume_db = -35.0

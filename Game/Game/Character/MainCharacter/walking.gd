@@ -7,8 +7,10 @@ func Update(_delta:float):
 	##Side the sprite Looks
 	if ($"../..".velocity.x > 0 && $"../../Sprite2D".flip_h != false ):
 		$"../../Sprite2D".flip_h = false
+		$"../../Weapons/Detergent".flip_h_false()
 	if ($"../..".velocity.x < 0 && $"../../Sprite2D".flip_h != true):
 		$"../../Sprite2D".flip_h = true
+		$"../../Weapons/Detergent".flip_h_true()
 
 	else:
 		Transitioned.emit(self,"Idle") 

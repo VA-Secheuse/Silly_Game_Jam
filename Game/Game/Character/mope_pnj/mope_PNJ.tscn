@@ -1,0 +1,119 @@
+[gd_scene load_steps=8 format=3 uid="uid://dff71xo881nb7"]
+
+[ext_resource type="Script" uid="uid://dndr3lcftf55c" path="res://Game/Character/mope_pnj/mope_pnj.gd" id="1_jocnx"]
+[ext_resource type="Texture2D" uid="uid://dmcapglhvb0s0" path="res://Assets/Personnage/vendeurs/Moppe/Moppe.png" id="1_k1pnq"]
+[ext_resource type="FontFile" uid="uid://bxcwj1nudjx55" path="res://Assets/font/m6x11.ttf" id="2_jocnx"]
+[ext_resource type="Texture2D" uid="uid://na6iyfjmyqkf" path="res://Assets/Armes/Moppe/Moppe.png" id="4_wp5r2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dyfxj"]
+size = Vector2(34, 23.5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ti31b"]
+font = ExtResource("2_jocnx")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pew4k"]
+size = Vector2(48.5, 38.5)
+
+[node name="MopePNJ" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+collision_layer = 32
+collision_mask = 7
+script = ExtResource("1_jocnx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2, 0)
+texture = ExtResource("1_k1pnq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(2, 12.25)
+shape = SubResource("RectangleShape2D_dyfxj")
+
+[node name="UpgradeMenu" type="Control" parent="."]
+process_mode = 3
+visible = false
+z_index = 2
+layout_mode = 3
+anchors_preset = 0
+offset_left = -103.0
+offset_top = -42.0
+offset_right = 110.0
+offset_bottom = 24.0
+
+[node name="ColorRect" type="ColorRect" parent="UpgradeMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.27058825, 0.27058825, 0.27058825, 0.7411765)
+
+[node name="MarginContainer" type="MarginContainer" parent="UpgradeMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="UpgradeMenu/MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 1
+text = "Do you want to 
+upgrade your mop ability ?"
+label_settings = SubResource("LabelSettings_ti31b")
+
+[node name="Yes" type="Button" parent="UpgradeMenu/MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("2_jocnx")
+text = "Yes"
+
+[node name="No" type="Button" parent="UpgradeMenu/MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("2_jocnx")
+text = "No"
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+z_index = 1
+position = Vector2(3.25, 8.5)
+shape = SubResource("RectangleShape2D_pew4k")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+texture_filter = 1
+offset_left = -12.0
+offset_top = 9.0
+offset_right = 16.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("2_jocnx")
+theme_override_font_sizes/font_size = 16
+text = "Soap"
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1.25, 16.25)
+rotation = 1.8306105
+scale = Vector2(0.5, 0.405)
+texture = ExtResource("4_wp5r2")
+
+[connection signal="pressed" from="UpgradeMenu/MarginContainer/Yes" to="." method="_on_yes_pressed"]
+[connection signal="pressed" from="UpgradeMenu/MarginContainer/No" to="." method="_on_no_pressed"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

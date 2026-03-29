@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cmn34b5qn4sx2"]
+[gd_scene load_steps=20 format=3 uid="uid://cmn34b5qn4sx2"]
 
 [ext_resource type="Texture2D" uid="uid://bxgvuwmwdfhl0" path="res://Assets/Personnage/Main dude/Main_dude.png" id="1_5vkwo"]
 [ext_resource type="Script" uid="uid://7gda5jr3ue4v" path="res://Game/Character/MainCharacter/robin_town.gd" id="1_dbb5j"]
@@ -6,8 +6,14 @@
 [ext_resource type="Script" uid="uid://ug0nvx2a603c" path="res://Game/System/StateMachine/state_machine.gd" id="3_hgdaa"]
 [ext_resource type="Script" uid="uid://cdu54sve7sbyo" path="res://Game/Character/MainCharacter/idle.gd" id="4_j0xwr"]
 [ext_resource type="Script" uid="uid://ckqt70hwyhix3" path="res://Game/Character/MainCharacter/walking.gd" id="5_j0xwr"]
-[ext_resource type="Script" uid="uid://df0oxqa3tvbyi" path="res://Game/weapon/soap/soap_weapon.gd" id="6_25m7p"]
 [ext_resource type="FontFile" uid="uid://bxcwj1nudjx55" path="res://Assets/font/m6x11.ttf" id="6_o08pi"]
+[ext_resource type="PackedScene" uid="uid://c43vha7180amo" path="res://Game/weapon/mope/mope_weapon.tscn" id="8_fubrf"]
+[ext_resource type="PackedScene" uid="uid://bm40ydojp2v6t" path="res://Game/weapon/soap/soap_weapon.tscn" id="9_j2rtl"]
+[ext_resource type="PackedScene" uid="uid://cgn34g6hi3xe3" path="res://Game/weapon/detergent/detergent.tscn" id="9_ksr5l"]
+[ext_resource type="AudioStream" uid="uid://b2kdxopex3eb8" path="res://Assets/Sound/Cash.mp3" id="11_j2rtl"]
+[ext_resource type="Texture2D" uid="uid://bcp83br8pbecl" path="res://Assets/Icone/Coeur.png" id="11_pyugw"]
+[ext_resource type="AudioStream" uid="uid://blatmlyq43m" path="res://Assets/Sound/player_hurt.mp3" id="12_ugth5"]
+[ext_resource type="AudioStream" uid="uid://bhchgq0wgtcu5" path="res://Assets/Sound/mainMusic.mp3" id="13_op5f0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fubrf"]
 shader = ExtResource("2_msp1c")
@@ -78,10 +84,13 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dbb5j"]
 size = Vector2(23, 24)
 
-[node name="RobinTown" type="CharacterBody2D" node_paths=PackedStringArray("soap_weapon")]
-collision_mask = 59
+[node name="RobinTown" type="CharacterBody2D" node_paths=PackedStringArray("soap_weapon", "mope_weapon", "detergent_weapon")]
+position = Vector2(0, -2)
+collision_mask = 123
 script = ExtResource("1_dbb5j")
 soap_weapon = NodePath("Weapons/Soap")
+mope_weapon = NodePath("Weapons/Mope")
+detergent_weapon = NodePath("Weapons/Detergent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -117,10 +126,21 @@ script = ExtResource("5_j0xwr")
 
 [node name="Weapons" type="Node2D" parent="."]
 
-[node name="Soap" type="Node2D" parent="Weapons" node_paths=PackedStringArray("player")]
-script = ExtResource("6_25m7p")
+[node name="Mope" parent="Weapons" node_paths=PackedStringArray("player") instance=ExtResource("8_fubrf")]
+position = Vector2(-2, 0)
 player = NodePath("../..")
-metadata/_custom_type_script = "uid://df0oxqa3tvbyi"
+
+[node name="Detergent" parent="Weapons" node_paths=PackedStringArray("player") instance=ExtResource("9_ksr5l")]
+position = Vector2(-3, 9)
+player = NodePath("../..")
+
+[node name="Soap2" type="Timer" parent="Weapons"]
+
+[node name="Mope2" type="Timer" parent="Weapons"]
+wait_time = 1.5
+
+[node name="Soap" parent="Weapons" node_paths=PackedStringArray("player") instance=ExtResource("9_j2rtl")]
+player = NodePath("../..")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
@@ -162,3 +182,41 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("6_o08pi")
 theme_override_font_sizes/font_size = 50
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/UI"]
+texture_filter = 1
+position = Vector2(39.000004, 487)
+scale = Vector2(4, 4)
+texture = ExtResource("11_pyugw")
+
+[node name="MarginContainer" type="MarginContainer" parent="Camera2D/UI"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_bottom = 7
+
+[node name="Label" type="Label" parent="Camera2D/UI/MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("6_o08pi")
+theme_override_font_sizes/font_size = 30
+text = "10"
+
+[node name="cash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_j2rtl")
+volume_db = -30.0
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_ugth5")
+volume_db = -20.0
+
+[node name="mainMusic" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("13_op5f0")
+volume_db = -30.0
+
+[connection signal="timeout" from="Weapons/Soap2" to="." method="_on_soap_2_timeout"]
+[connection signal="timeout" from="Weapons/Mope2" to="." method="_on_mope_2_timeout"]

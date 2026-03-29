@@ -13,6 +13,7 @@ var projectile_scale = Vector2(1,1)
 
 
 
+
 @export var player : Player
 
 static var soap_projectile = preload("res://Game/weapon/soap/soap_projectile.tscn")
@@ -48,7 +49,8 @@ func use_weapon():
 			second_projectile_timer.start()
 		_:
 			pass
-
+			
+	$AudioStreamPlayer2D.play()
 func shoot_spread(position: Vector2, toward: Vector2, count: int, spread_degrees: float):
 	var base_direction = position.direction_to(toward)
 	var base_angle = base_direction.angle()

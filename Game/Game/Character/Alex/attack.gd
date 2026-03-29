@@ -15,3 +15,7 @@ func Update(_delta:float):
 
 func move_to(vector : Vector2):
 	$"../..".velocity = $"../..".position.direction_to(vector) * $"../..".speed
+	if $"../..".velocity.x > 0:
+		$"../../Sprite2D".flip_h = false
+	elif $"../..".velocity.x < 0:
+		$"../../Sprite2D".flip_h = true

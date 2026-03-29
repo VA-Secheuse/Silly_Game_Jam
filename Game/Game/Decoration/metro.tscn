@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://betpju6sfcuaw"]
+
+[ext_resource type="Texture2D" uid="uid://b50qkrfnt8e07" path="res://Assets/Maison1/Metro station.png" id="1_rnfqc"]
+
+[node name="Metro" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-238, 266, 299, 265, 299, 49, 45, 52, 42, -253, -236, -253)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(16, 13)
+scale = Vector2(2, 2)
+texture = ExtResource("1_rnfqc")

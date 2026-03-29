@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://6fcbeu5ct4bl"]
+
+[ext_resource type="Texture2D" uid="uid://hsseagt0n8ck" path="res://Assets/Tileset_suite/Bus_transparent.png" id="1_wgoxk"]
+
+[node name="BusStop" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-49, 31, 49, 31, 49, -6, -50, -7)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_wgoxk")

@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7g5py46xx15j"]
+
+[ext_resource type="Script" uid="uid://cd4517smru1ti" path="res://Game/weapon/mope/mope_projectile.gd" id="1_d85er"]
+[ext_resource type="Texture2D" uid="uid://na6iyfjmyqkf" path="res://Assets/Armes/Moppe/Moppe.png" id="2_g4s55"]
+
+[node name="MopeProjectile" type="Node2D"]
+script = ExtResource("1_d85er")
+
+[node name="RotationOffset" type="Marker2D" parent="."]
+
+[node name="CharacterBody2D" type="Area2D" parent="RotationOffset"]
+position = Vector2(0, -21)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RotationOffset/CharacterBody2D"]
+rotation = -3.1415925
+polygon = PackedVector2Array(-4, 0, -4, 15, -10, 23, -12, 33, 15, 32, 11, 22, 4, 15, 4, -29, 0, -33, -4, -29)
+
+[node name="Sprite2D" type="Sprite2D" parent="RotationOffset/CharacterBody2D"]
+texture_filter = 1
+rotation = -3.1415925
+scale = Vector2(2, 2)
+texture = ExtResource("2_g4s55")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[connection signal="body_entered" from="RotationOffset/CharacterBody2D" to="." method="_on_character_body_2d_body_entered"]

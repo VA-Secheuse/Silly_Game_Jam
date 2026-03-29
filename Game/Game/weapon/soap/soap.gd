@@ -5,11 +5,12 @@ var speed = 100
 
 var damage = 1
 
-func _ready() -> void:
-	$Bubble.play("Bubble")
-	$AnimationPlayer.play("soap_rotation")
 const SPEED = 400.0
 var direction: Vector2 = Vector2.ZERO
+
+func _ready() -> void:
+	$Bubble.play("Bubble")
+
 
 
 

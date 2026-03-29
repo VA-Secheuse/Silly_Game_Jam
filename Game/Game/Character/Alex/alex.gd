@@ -1,6 +1,7 @@
 class_name Enemies extends CharacterBody2D
 
 var speed = 100
+var base_speed = 100
 var life = 5
 var knockback = Vector2.ZERO
 var damage = 1
@@ -8,8 +9,8 @@ var damage = 1
 static var ennemie = preload("res://Game/Character/Alex/alex.tscn")
 
 func _ready():
-	# make material unique to this instance
-	$Sprite2D.material = $Sprite2D.material.duplicate()  # ← key fix
+
+	$Sprite2D.material = $Sprite2D.material.duplicate()  
 	$Sprite2D.material.set_shader_parameter("flash_color", Color.WHITE)
 	$Sprite2D.material.set_shader_parameter("flash_value", 0.0)
 
@@ -26,7 +27,7 @@ static func spawn(vector : Vector2,node : Node):
 
 func receive_damage(damage : int, hit_direction: Vector2):
 	life -= damage
-	knockback = hit_direction * 200 
+	knockback = hit_direction * 400 
 	if(life <= 0):
 		kill()
 	var anim = $Sprite2D/AnimationPlayer
@@ -37,6 +38,7 @@ func receive_damage(damage : int, hit_direction: Vector2):
 func kill():
 	Money.create_and_intantiate(randi_range(5,10),self.global_position,get_parent())
 	self.queue_free()
+	$Hurt.play()
 	get_tree().get_root().get_node("MainLevel").add_score(50)
 
 
@@ -44,5 +46,5 @@ func _on_damage_radius_body_entered(body: Node2D) -> void:
 	if body.has_method('receive_damage'):
 		body.receive_damage(-damage)
 		var direction = (self.global_position - body.global_position).normalized()
-		knockback = direction * 400 
+		knockback = direction * 400
 	

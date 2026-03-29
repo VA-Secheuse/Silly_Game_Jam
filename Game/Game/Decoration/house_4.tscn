@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnq2o2dm52rts"]
+
+[ext_resource type="Texture2D" uid="uid://big0406s2qukq" path="res://Assets/Village/Batiment/Café_haut.png" id="1_t5o6b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5o6b"]
+size = Vector2(205, 126)
+
+[node name="house_4" type="StaticBody2D"]
+texture_filter = 1
+scale = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_t5o6b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_t5o6b")

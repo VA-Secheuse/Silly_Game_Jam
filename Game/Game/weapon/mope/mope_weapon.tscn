@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c43vha7180amo"]
+
+[ext_resource type="Script" uid="uid://vsif2f0px0am" path="res://Game/weapon/mope/mope_weapon.gd" id="1_tx7f3"]
+[ext_resource type="AudioStream" uid="uid://cxdturhs42jo8" path="res://Assets/Sound/mop_swing.mp3" id="2_cmna2"]
+
+[node name="mope_weapon" type="Node2D"]
+script = ExtResource("1_tx7f3")
+
+[node name="Projectile" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_cmna2")
+volume_db = -25.0

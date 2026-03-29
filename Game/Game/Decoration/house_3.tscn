@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1es5detjwj5m"]
+
+[ext_resource type="Texture2D" uid="uid://chh4acqqje318" path="res://Assets/Village/Batiment/Batiment_gauche.png" id="1_wj5bf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wj5bf"]
+size = Vector2(156, 239)
+
+[node name="house3" type="StaticBody2D"]
+scale = Vector2(2, 2)
+collision_layer = 8
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+texture_filter = 1
+position = Vector2(-1, 0.5)
+shape = SubResource("RectangleShape2D_wj5bf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wj5bf")

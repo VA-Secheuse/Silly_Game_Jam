@@ -2,9 +2,10 @@ class_name Player extends CharacterBody2D
 
 @export var speed = 400
 
-var money = 6000
+var base_speed = 400
+var money = 5000
 
-var life = 2
+var life = 10
 
 var score = 0
 
@@ -12,15 +13,23 @@ var score = 0
 
 @export var soap_weapon : Soap 
 
+@export var mope_weapon : Mope
+
+@export var detergent_weapon : DetergentWeapon
+
 @export var mainLevel : MainLevel
 
 func _ready() -> void:
 	update_score(score)
+	update_money(money)
 	$Camera2D/UI.move_to_front()
+	$Weapons/Soap2.start()
+	$Weapons/Mope2.start()
+	$mainMusic.play()
+	$Camera2D/UI/MarginContainer/Label.text = str(life)
+	
 
-func _process(delta: float) -> void:
-	if(Input.is_action_just_pressed("Action")):
-		$Weapons/Soap.use_weapon()
+
 
 func restart():
 	money = 6000
@@ -28,7 +37,9 @@ func restart():
 	score = 0
 	update_score(score)
 	$Weapons/Soap.restart()
-	
+	$Weapons/Mope.resart()
+	$Weapons/Detergent.restart()
+	$Camera2D/UI/MarginContainer/Label.text = str(life)
 
 func update_display(elapsed_time):
 	var minutes = int(elapsed_time) / 60
@@ -37,6 +48,7 @@ func update_display(elapsed_time):
 
 func update_money(add_or_remove_money):
 	money += add_or_remove_money
+	$cash.play()
 	$Camera2D/UI/money.text = "%02d$" % [money]
 
 func update_score(add_score):
@@ -48,6 +60,17 @@ func receive_damage(life_change : int):
 		i_frame = true
 		life += life_change
 		$Sprite2D/AnimationPlayer.play("flash")
+		$Camera2D/UI/MarginContainer/Label.text = str(life)
+		$Hurt.play()
 	if(life <=0):
 		mainLevel.death_screen()
 		
+
+
+func _on_soap_2_timeout() -> void:
+	soap_weapon.use_weapon()
+
+
+func _on_mope_2_timeout() -> void:
+	if mope_weapon.enable  == true:
+		mope_weapon.use_weapon()
