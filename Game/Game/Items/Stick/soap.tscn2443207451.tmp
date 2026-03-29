@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfn346mlu5edk"]
+
+[ext_resource type="Script" uid="uid://b4ytj6r2dl5la" path="res://Game/Items/Soap/soap.gd" id="1_x36sb"]
+
+[node name="Soap" type="Node2D"]
+script = ExtResource("1_x36sb")

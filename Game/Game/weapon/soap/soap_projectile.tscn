@@ -1,0 +1,135 @@
+[gd_scene load_steps=16 format=3 uid="uid://csdq8tqc7qrdc"]
+
+[ext_resource type="Script" uid="uid://cmngd0cgsaiqj" path="res://Game/weapon/soap/soap.gd" id="1_fwynk"]
+[ext_resource type="Texture2D" uid="uid://b6cawcxljhf0t" path="res://Assets/Armes/Savon/Savon.png" id="2_hle8o"]
+[ext_resource type="Texture2D" uid="uid://ie6se52bdfek" path="res://Assets/Armes/Savon/Bulles-Sheet.png" id="3_a2w1x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xl2p3"]
+atlas = ExtResource("3_a2w1x")
+region = Rect2(0, 0, 6, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4q4jv"]
+atlas = ExtResource("3_a2w1x")
+region = Rect2(6, 0, 6, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsuwn"]
+atlas = ExtResource("3_a2w1x")
+region = Rect2(12, 0, 6, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olaib"]
+atlas = ExtResource("3_a2w1x")
+region = Rect2(18, 0, 6, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4m5rb"]
+atlas = ExtResource("3_a2w1x")
+region = Rect2(24, 0, 6, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hira5"]
+atlas = ExtResource("3_a2w1x")
+region = Rect2(30, 0, 6, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_devvm"]
+atlas = ExtResource("3_a2w1x")
+region = Rect2(36, 0, 6, 6)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pbop3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xl2p3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4q4jv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsuwn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olaib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4m5rb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hira5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_devvm")
+}],
+"loop": true,
+"name": &"Bubble",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_xl2p3"]
+resource_name = "soap_rotation"
+length = 0.33333668
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Soap:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.141592653589793]
+}
+
+[sub_resource type="Animation" id="Animation_4q4jv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Soap:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xsuwn"]
+_data = {
+&"RESET": SubResource("Animation_4q4jv"),
+&"soap_rotation": SubResource("Animation_xl2p3")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xl2p3"]
+size = Vector2(13, 12)
+
+[node name="SoapProjectile" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 10
+script = ExtResource("1_fwynk")
+
+[node name="Soap" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("2_hle8o")
+
+[node name="Bubble" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(4, -6)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_pbop3")
+animation = &"Bubble"
+frame = 1
+frame_progress = 0.19207941
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xsuwn")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xl2p3")
